@@ -283,7 +283,7 @@ def main(trial):
 
     # test best model
     print('---------Evaluate Model on Test Set---------------')
-    best_checkpoint = torch.load('bluegh.pth.tar')
+    best_checkpoint = torch.load('model.pth.tar')
     model.load_state_dict(best_checkpoint['state_dict'])
     return validate(test_loader, model, criterion, normalizer, test=True)
 
@@ -433,10 +433,10 @@ class AverageMeter(object):
         self.avg = self.sum / self.count
 
 
-def save_checkpoint(state, is_best, filename='bluegh.pth.tar'):
+def save_checkpoint(state, is_best, filename='model.pth.tar'):
     torch.save(state, filename)
     if is_best:
-        shutil.copyfile(filename, 'foff.pth.tar')
+        shutil.copyfile(filename, 'best_model.pth.tar')
 
 
 def adjust_learning_rate(optimizer, epoch, k):
